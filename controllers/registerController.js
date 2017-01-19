@@ -27,6 +27,7 @@ app.controller('registerCtrl', function ($scope, $rootScope, $state, UserService
                             console.log(response);
                             //$state.go('login');                            
                         }
+                        console.log("This change made at Github");
                         $rootScope.showAlert(response, true);
                     });
         }
