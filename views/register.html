@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="row centered-form">
+        <ng-include src="'views/alert.html'"></ng-include>
+        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Please sign up for AVChat <small>It's free!</small></h3>
+                </div>
+                <div class="panel-body">
+                    
+                    <form name="userForm" ng-submit="submitRegistrationForm()" novalidate>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group" ng-class="{ 'has-error' : userForm.first_name.$invalid && !userForm.first_name.$pristine }">
+                                    <input type="text" name="first_name" id="first_name" ng-model="user.first_name" class="form-control input-sm" placeholder="First Name" required>
+                                    <p ng-show="userForm.first_name.$invalid && !userForm.first_name.$pristine" class="help-block">First name is required.</p>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group" ng-class="{ 'has-error' : userForm.last_name.$invalid && !userForm.last_name.$pristine }">
+                                    <input type="text" name="last_name" id="last_name" ng-model="user.last_name" class="form-control input-sm" placeholder="Last Name" required>
+                                    <p ng-show="userForm.last_name.$invalid && !userForm.last_name.$pristine" class="help-block">Last name is required.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }" email-available>
+                            <!-- <input type="email" name="email" id="email" class="form-control input-sm" ng-model="user.email" placeholder="Email Address" check-email required> -->
+
+
+                            <input type="email" name="email" id="email" class="form-control input-sm" ng-model="user.email" placeholder="Email Address" unique-email required>
+
+                            <p ng-show="userForm.email.$invalid && !userForm.email.$pristine && !userForm.email.$error.uniqueEmail" class="help-block">Valid email is required.</p>
+                            
+                            <!-- <p ng-if="userForm.$pending.isDuplicatedEmail" class="help-block">checking...</p> -->
+                            <!-- <p ng-if="userForm.email.$error.isDuplicatedEmail" class="help-block">Email id already taken.</p> -->
+
+                            <p ng-if="userForm.$pending.uniqueEmail" class="help-block">checking...</p>
+                            <p ng-if="userForm.email.$error.uniqueEmail" class="help-block">Email id already taken.</p>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
+                                    <input type="password" name="password" id="password" ng-model="user.pass" class="form-control input-sm" placeholder="Password" ng-minlength="3" required>
+                                    <p ng-show="userForm.password.$error.required && !userForm.password.$pristine" class="help-block">password is required.</p>
+                                    <p ng-show="userForm.password.$error.minlength" class="help-block">password name is too short.</p>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group" ng-class="{ 'has-error' : userForm.password_c.$invalid && !userForm.password_c.$pristine }">
+                                    <input type="password" name="password_c" id="password_c" ng-model="user.password_c" class="form-control input-sm" placeholder="Confirm Password" valid-password-c="user.pass" required>
+                                    <p class="help-block" ng-show="userForm.password_c.$error.noMatch && !userForm.password_c.$pristine">Passwords do not match.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="submit" value="Register" class="btn btn-info btn-block" ng-disabled="userForm.$invalid">
+                        Already have account? <a ui-sref="login">Login here</a>
+
+
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

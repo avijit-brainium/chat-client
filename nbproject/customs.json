@@ -1,0 +1,15 @@
+{
+    "elements": {},
+    "attributes": {
+        "ui-href": {
+            "context": "a"
+        },
+        "ui-view": {
+            "context": "div"
+        },
+        "valid-password-c": {},
+        "ui-sref": {
+            "context": "a"
+        }
+    }
+}
