@@ -12,7 +12,7 @@ app.controller('registerCtrl', function ($scope, $rootScope, $state, UserService
                         if(response.success){
                             $state.go('login');                            
                         }
-                        console.log("My First Change after commit");
+                        console.log("This is my second change - Chnage made locally");
                         $rootScope.showAlert(response, true);
                     });
         }
