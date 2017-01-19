@@ -12,6 +12,7 @@ app.controller('registerCtrl', function ($scope, $rootScope, $state, UserService
                         if(response.success){
                             $state.go('login');                            
                         }
+                        console.log("This is my second change");
                         $rootScope.showAlert(response, true);
                     });
         }
