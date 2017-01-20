@@ -38,7 +38,10 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
                 url: '/about',
                 views: {
                     // the main template will be placed here (relatively named)
-                    '': {templateUrl: 'views/partial-about.html'},
+                    '': {
+                        templateUrl: 'views/partial-about.html',
+                        controller: 'aboutCtrl'
+                    },
                     
                     // the child views will be defined here (absolutely named)
                     'columnOne@about': {template: 'I am in Column One under about'},

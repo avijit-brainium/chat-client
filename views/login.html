@@ -10,16 +10,16 @@
                 </div>
                 <div class="panel-body">
                     
-                    <form role="form" name="loginForm" ng-submit="submitLoginForm()">                        
-                        <div class="form-group">
+                    <form name="loginForm" ng-submit="submitLoginForm()" novalidate>                        
+                        <div class="form-group" ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine }">
                             <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address" ng-model="user.email" required>
                             <p ng-show="loginForm.email.$invalid && !loginForm.email.$pristine" class="help-block">Valid email is required.</p>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
                             <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password" ng-model="user.pass" required>
-                            <p ng-show="userForm.password.$error.required && !userForm.password.$pristine" class="help-block">password is required.</p>                           
+                            <p ng-show="loginForm.password.$error.required && !loginForm.password.$pristine" class="help-block">password is required.</p>                           
                         </div>
-                        <input type="submit" value="Login" class="btn btn-info btn-block">
+                        <input type="submit" value="Login" class="btn btn-info btn-block" ng-disabled="loginForm.$invalid">
                         No account yet? <a ui-sref="register">Register here</a>
                     </form>
                 </div>
