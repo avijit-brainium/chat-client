@@ -33,16 +33,16 @@ custom_validation.directive('uniqueEmail', ["UserService", function (UserService
       ctrl.$parsers.push(function (viewValue) {
 
         if (viewValue) {
-            console.log("viewValue : ", viewValue);
-          UserService.prepTime(viewValue, function(data){
-            console.log(data);
-            //if (data) {
-              ctrl.$setValidity('uniqueEmail', data);
-            //} else {
-              //ctrl.$setValidity('uniqueEmail', false);
-            //}
-          });
-          return viewValue;
+            UserService.isDuplicateEmail(viewValue, function(data){
+                console.log("data: ", data);
+              //if (data) {
+                ctrl.$setValidity('uniqueEmail', data);
+              //} else {
+                //ctrl.$setValidity('uniqueEmail', false);
+              //}
+            });
+            //ctrl.$setValidity('uniqueEmail', true);
+            //return viewValue;
         }
       });
     }

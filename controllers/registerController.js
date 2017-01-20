@@ -1,6 +1,7 @@
 app.controller('registerCtrl', function ($scope, $rootScope, $state, UserService) {
     
     //$rootScope.hideAllAlert();    
+    console.log("$rootScope.isLoggedIn: ", $rootScope.isLoggedIn);
     
     // function to submit the form after all validation has occurred			
     $scope.submitRegistrationForm = function () {

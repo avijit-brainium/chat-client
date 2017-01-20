@@ -3,35 +3,49 @@ var app = angular.module('chatClient', ['ui.router', 'customValidation']);
 app.constant('SERVICE_ENDPOINT', 'http://localhost:3000/api/');
 
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
-    $urlRouterProvider.otherwise('/register');
+    $urlRouterProvider.otherwise('/login');
     
     $stateProvider
     
             .state('login', {
                 url: '/login',
                 templateUrl: 'views/login.html',
-                controller: 'registerCtrl'
+                controller: 'registerCtrl',
+                authenticate: false
+            })
+            .state('logout', {
+                url: '/logout',
+                authenticate: true,
+                controller: function($scope, $rootScope, $state){
+                    localStorage.removeItem('x-access-token');
+                    $rootScope.isLoggedIn = false;
+                    $state.transitionTo('login');
+                }
             })
             .state('register', {
                 url: '/register',
                 templateUrl: 'views/register.html',
-                controller: 'registerCtrl'
+                controller: 'registerCtrl',
+                authenticate: false
             })
             .state('home', {
                 url: '/home',
-                templateUrl: 'views/partial-home.html'
+                templateUrl: 'views/partial-home.html',
+                authenticate: false
             })
             .state('home.list', {
                 url: '/list',
                 templateUrl: 'views/partial-home-list.html',
                 controller: function($scope){
                     $scope.names = ['John', 'Tim', 'Ricky', 'Arnold'];
-                }
+                },
+                authenticate: false
             })
             
             .state('home.paragraph', {
                 url: '/paragraph',
-                template: 'This is just some sample text...'
+                template: 'This is just some sample text...',
+                authenticate: false
             })
             
             .state('about', {
@@ -51,7 +65,8 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
                         templateUrl: 'views/table-data.html',
                         controller: 'scotchController'
                     }
-                }
+                },
+                authenticate: true
             });
 });
 
@@ -72,7 +87,33 @@ app.config(function($provide, $httpProvider){
     $httpProvider.interceptors.push('ErrorInterceptor');
 });
 
-app.run(function($rootScope, $timeout){
+app.run(function($rootScope, $state, $timeout, UserService){
+    
+    $rootScope.isLoggedIn = false;
+    $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
+        
+        //console.log("toState.authenticate : ", toState.authenticate);
+        //console.log(UserService.isAuthenticated());
+        if (toState.authenticate) {
+            if(!UserService.isAuthenticated()){
+                $state.transitionTo("login");
+                event.preventDefault();
+            } else {
+                $rootScope.isLoggedIn = true;
+            }
+            
+        } 
+    });
+    
+    $rootScope.logout = function(){
+        localStorage.removeItem('x-access-token');
+        $rootScope.isLoggedIn = false;
+        console.log("HI");
+        console.log("$rootScope.isLoggedIn: ", $rootScope.isLoggedIn);
+        //$state.transitionTo('login');
+    }
+    
+    
     $rootScope.alert = {
         error: false,
         success: false,

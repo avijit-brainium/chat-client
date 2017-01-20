@@ -17,10 +17,13 @@
     <script src="lib/js/jquery-3.1.1.min.js" type="text/javascript"></script>
     <script src="lib/js/bootstrap.min.js" type="text/javascript"></script>
     
+    <script src="services/UserService.js" type="text/javascript"></script>
+    
     <script src="controllers/scotchController.js" type="text/javascript"></script>
     <script src="controllers/registerController.js" type="text/javascript"></script>
+    <script src="controllers/aboutController.js" type="text/javascript"></script>
     
-    <script src="services/UserService.js" type="text/javascript"></script>
+    
     
     <script src="directives/ValidateDirectives.js" type="text/javascript"></script>
 </head>
@@ -29,15 +32,10 @@
 <body ng-app="chatClient">
 
 <!-- NAVIGATION -->
-<nav class="navbar navbar-inverse" role="navigation">
-    <div class="navbar-header">
-        <a class="navbar-brand" ui-sref="#">AngularUI Router</a>
-    </div>
-    <ul class="nav navbar-nav">
-        <li><a ui-sref="home">Home</a></li>
-        <li><a ui-sref="about">About</a></li>
-    </ul>
-</nav>
+
+<ng-include src="'views/header-nav.html'"></ng-include>
+
+
 
 <!-- MAIN CONTENT -->
 <div class="container">

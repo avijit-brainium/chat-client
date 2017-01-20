@@ -12,7 +12,7 @@ app.service('UserService', function($http, SERVICE_ENDPOINT){
     this.isDuplicateEmail = function (email) {
         return $http.get(SERVICE_ENDPOINT + 'check-email?email=' + email)
                     .success(function(response){
-                        //console.log(response);
+                        //console.log("response: ", response.success);
                         return response.success;
                     });
         
@@ -24,6 +24,13 @@ app.service('UserService', function($http, SERVICE_ENDPOINT){
             email: user.email,
             password: user.pass
         });
+    },
+    
+    this.isAuthenticated = function(){
+        var token = localStorage.getItem('x-access-token');
+        if(typeof(token) != "undefined" && token != null && token != "")
+            return true;
+        return false;
     }
 });
 

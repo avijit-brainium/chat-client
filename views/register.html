@@ -21,23 +21,17 @@
                                 <div class="form-group" ng-class="{ 'has-error' : userForm.last_name.$invalid && !userForm.last_name.$pristine }">
                                     <input type="text" name="last_name" id="last_name" ng-model="user.last_name" class="form-control input-sm" placeholder="Last Name" required>
                                     <p ng-show="userForm.last_name.$invalid && !userForm.last_name.$pristine" class="help-block">Last name is required.</p>
-                                    
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }" email-available>
-                            <!-- <input type="email" name="email" id="email" class="form-control input-sm" ng-model="user.email" placeholder="Email Address" check-email required> -->
-
-
-                            <input type="email" name="email" id="email" class="form-control input-sm" ng-model="user.email" placeholder="Email Address" unique-email required>
+                            <input type="email" name="email" id="email" class="form-control input-sm" ng-model="user.email" placeholder="Email Address"
+                                   unique-email 
+                                   required>
 
                             <p ng-show="userForm.email.$invalid && !userForm.email.$pristine && !userForm.email.$error.uniqueEmail" class="help-block">Valid email is required.</p>
-                            
-                            <!-- <p ng-if="userForm.$pending.isDuplicatedEmail" class="help-block">checking...</p> -->
-                            <!-- <p ng-if="userForm.email.$error.isDuplicatedEmail" class="help-block">Email id already taken.</p> -->
-
-                            <p ng-if="userForm.$pending.uniqueEmail" class="help-block">checking...</p>
+                            <!--<p ng-if="userForm.$pending.uniqueEmail" class="help-block">checking...</p>-->
                             <p ng-if="userForm.email.$error.uniqueEmail" class="help-block">Email id already taken.</p>
                         </div>
 
